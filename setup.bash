@@ -1,0 +1,1 @@
+cp default_setitngs.yaml settings.yaml
