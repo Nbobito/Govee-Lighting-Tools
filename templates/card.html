@@ -1,0 +1,77 @@
+{% macro card(id, title='', min_temp=2000, max_temp=9000) -%}
+<div class="bulb-card card shadow" id="bulbCard{{ id }}" data-id="{{ id }}">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="card-title mb-0">{{ title }}</h5>
+    <div class="form-check form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="powerSwitch{{ id }}"
+      />
+      <label class="form-check-label" for="powerSwitch{{ id }}">Power</label>
+    </div>
+  </div>
+  <div class="card-body text-center">
+    <div class="mb-3">
+      <label for="brightnessSlider{{ id }}" class="form-label"
+        >Brightness</label
+        >
+      <input
+        type="range"
+        class="form-range"
+        min="0"
+        max="100"
+        id="brightnessSlider{{ id }}"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="temperatureSlider{{ id }}" class="form-label"
+        >Color Temperature</label
+      >
+      <input
+        type="range"
+        class="form-range"
+        min="{{ min_temp }}"
+        max="{{ max_temp }}"
+        id="temperatureSlider{{ id }}"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="redSlider{{ id }}" class="form-label">Red</label>
+      <input
+        type="range"
+        class="form-range"
+        min="0"
+        max="255"
+        id="redSlider{{ id }}"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="greenSlider{{ id }}" class="form-label">Green</label>
+      <input
+        type="range"
+        class="form-range"
+        min="0"
+        max="255"
+        id="greenSlider{{ id }}"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="blueSlider{{ id }}" class="form-label">Blue</label>
+      <input
+        type="range"
+        class="form-range"
+        min="0"
+        max="255"
+        id="blueSlider{{ id }}"
+      />
+    </div>
+    <div class="mb-3">
+        <label for="replacemePreview">Preview</label>
+        <div class="preview" id="colorPreview{{ id }}"></div>
+    </div>
+  </div>
+  <div class="card-footer">
+   </div>
+</div>
+{%- endmacro %}

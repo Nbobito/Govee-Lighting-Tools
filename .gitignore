@@ -1,0 +1,4 @@
+settings.yaml
+__pycache__/
+flask/
+venv/
