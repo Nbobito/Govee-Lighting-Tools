@@ -1,7 +1,7 @@
-{% macro card(id, title='', min_temp=2000, max_temp=9000) -%}
+{% macro card(id, device) -%}
 <div class="bulb-card card shadow" id="bulbCard{{ id }}" data-id="{{ id }}">
   <div class="card-header d-flex justify-content-between align-items-center">
-    <h5 class="card-title mb-0">{{ title }}</h5>
+    <h5 class="card-title mb-0">{{ device.device_name }}</h5>
     <div class="form-check form-switch">
       <input
         class="form-check-input"
@@ -31,8 +31,8 @@
       <input
         type="range"
         class="form-range"
-        min="{{ min_temp }}"
-        max="{{ max_temp }}"
+        min="2000"
+        max="9000"
         id="temperatureSlider{{ id }}"
       />
     </div>
@@ -72,6 +72,32 @@
     </div>
   </div>
   <div class="card-footer">
-   </div>
+  </div>
+  <script>
+    (() => {
+      // get bulb state
+      let brightness = "{{ device.state['brightness'] }}"
+      let mode = "{{ device.state['mode'] }}"
+      let temperature = "{{ device.state['color_temp'] }}"
+      let r = "{{ device.state['color']['r'] }}"
+      let g = "{{ device.state['color']['g'] }}"
+      let b = "{{ device.state['color']['b'] }}"
+          
+      // initialize card values from lights states
+      document.getElementById("powerSwitch{{ id }}").checked = "{{ device.state['power_state'] }}" == "on"
+      document.getElementById("brightnessSlider{{ id }}").value = brightness
+      document.getElementById("temperatureSlider{{ id }}").value = temperature
+      document.getElementById("redSlider{{ id }}").value = r
+      document.getElementById("greenSlider{{ id }}").value = g
+      document.getElementById("blueSlider{{ id }}").value = b
+          
+      // set color preview
+      let preview = document.getElementById("colorPreview{{ id }}")
+      if(mode == 'temp'){
+        [r, g, b] = kelvinToRGB(temperature)
+      }
+      preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
+    })()
+  </script>
 </div>
 {%- endmacro %}

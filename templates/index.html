@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='icon.svg') }}" type="image/x-icon">
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark-subtle">
@@ -31,10 +32,9 @@
   </nav>
 
   <div class="card-container">
-    {{ card(1, "Bedroom 1") }}
-    {{ card(2, "Bedroom 2") }}
-    {{ card(3, "Computer Room 1") }}
-    {{ card(4, "Computer Room 2") }}
+    {% for device in devices %}
+      {{ card(loop.index, device) }}
+    {% endfor %}
   </div>
 
     <!--scripts-->
