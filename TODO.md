@@ -2,3 +2,4 @@
 - Gradient sliders?
 - Groups
 - Bluetooth support
+- Refactor into State class

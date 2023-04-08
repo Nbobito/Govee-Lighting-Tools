@@ -1,5 +1,5 @@
 {% macro card(id, device) -%}
-<div class="bulb-card card shadow" id="bulbCard{{ id }}" data-id="{{ id }}">
+<div class="bulb-card card shadow" id="bulbCard{{ id }}" data-id="{{ id }}" data-mode="{{ device.state['mode'] }}" data-name="{{ device.device_name }}">
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="card-title mb-0">{{ device.device_name }}</h5>
     <div class="form-check form-switch">
@@ -67,7 +67,7 @@
       />
     </div>
     <div class="mb-3">
-        <label for="replacemePreview">Preview</label>
+        <label for="colorPreview{{ id }}">Preview</label>
         <div class="preview" id="colorPreview{{ id }}"></div>
     </div>
   </div>
@@ -94,9 +94,11 @@
       // set color preview
       let preview = document.getElementById("colorPreview{{ id }}")
       if(mode == 'temp'){
-        [r, g, b] = kelvinToRGB(temperature)
+        let {r, g, b} = kelvinToRGB(temperature)
+        preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
+      } else {
+        preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
       }
-      preview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
     })()
   </script>
 </div>
