@@ -3,3 +3,8 @@
 - Groups
 - Bluetooth support
 - Refactor into State class
+- Create schema in libs if schema becomes more complex
+- Finish setup.bash
+- Implement variable temp / functionality
+- Fix preview bugs
+- Make it actually fast

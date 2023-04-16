@@ -98,31 +98,39 @@ class Device:
         json = {'device': self.device, 'model': self.model, 'cmd': cmd}
         
         # TODO: Fix this
+        # TODO: Find what "Fix this" means
         try:
             data = requests.put(endpoint, headers=headers, json=json).json()
         except:
             raise ConnectionError
         
-        if data["code"] != 200:
-            raise ConnectionError(f"Error {data['code']}: {data['message']}")
+        if data.get('code') != 200:
+            raise ConnectionError(f"Command {cmd} raised error {data.get('code')}: {data.get('message')}")
         
         return data
     
     def turn_on(self) -> str:
-        data = self.send_cmd({'name': 'turn', 'value': 'on'})
-        
-        if data["message"] == "success":
-            self.state["power_state"] = "on"
-        
-        return data["message"]
+        if self.state["power_state"] == "off":
+            
+            data = self.send_cmd({'name': 'turn', 'value': 'on'})
+
+            if data["message"] == "success":
+                self.state["power_state"] = "on"
+
+            return data["message"]
+        else:
+            return "already on"
     
     def turn_off(self) -> str:
-        data = self.send_cmd({'name': 'turn', 'value': 'off'})
-        
-        if data["message"] == "success":
-            self.state["power_state"] = "off"
-        
-        return data["message"]
+        if self.state["power_state"] == "on":
+            data = self.send_cmd({'name': 'turn', 'value': 'off'})
+
+            if data["message"] == "success":
+                self.state["power_state"] = "off"
+
+            return data["message"]
+        else:
+            return "already off"
     
     def set_brightness(self, value: int) -> str:
         data = self.send_cmd({'name': 'brightness', 'value': value})
