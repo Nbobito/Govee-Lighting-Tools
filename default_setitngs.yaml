@@ -1,8 +1,0 @@
-auth: 
-  token: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-api:
-  endpoint: https://developer-api.govee.com
-  devices: /v1/devices
-  device_control: /v1/devices/control
-  device_state: /v1/devices/state
-  timeout: 3

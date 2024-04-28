@@ -1,0 +1,11 @@
+auth: 
+  token: ab51fe3c-ca7c-4ec8-9d37-50abdd42324a
+api:
+  endpoint: https://developer-api.govee.com
+  devices: /v1/devices
+  device_control: /v1/devices/control
+  device_state: /v1/devices/state
+  timeout: 3
+server_settings:
+  port: 8181
+
